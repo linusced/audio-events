@@ -1,0 +1,135 @@
+#editor {
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 20px 0
+}
+#preview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: #000;
+    border: 2px solid var(--preview-border);
+    margin: 0 10px;
+    z-index: 4
+}
+#preview-title {
+    position: absolute;
+    font-size: 45px;
+    user-select: none;
+    color: var(--preview-title)
+}
+#editor-zoom {
+    margin: 10px 0
+}
+.controls {
+    padding: 10px 0
+}
+#audio-controls button, #audio-controls h3, #audio-controls h4 {
+    color: #fa0
+}
+#audio-controls .slider-track {
+    background: #fa0
+}
+label[for="editor-snap"] {
+    margin: 0 10px;
+    color: #fff
+}
+#editor-snap {
+    width: 20px;
+    height: 20px;
+    cursor: pointer
+}
+#editor-events-control {
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%
+}
+#selected-event.hidden {
+    display: flex !important;
+    visibility: hidden
+}
+#event-automation {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    border: 2px solid var(--border-color);
+    padding: 5px
+}
+[data-automation-index] {
+    position: relative
+}
+[data-automation-index] .hover-bg {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #8886;
+    cursor: pointer
+}
+[data-automation-index] .hover-bg-2 {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -80px;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: #8f86;
+    color: var(--text-color);
+    font-size: 22px;
+    cursor: pointer
+}
+[data-automation-index].remove {
+    outline: 2px solid var(--invalid-color)
+}
+[data-automation-index].remove:hover .hover-bg, [data-automation-index].add:hover .hover-bg, [data-automation-index].add:hover .hover-bg-2 {
+    display: flex
+}
+[data-automation-index].add:hover {
+    margin-top: 80px;
+    overflow: visible
+}
+[data-automation-index].bottom {
+    height: 30px
+}
+#remove-automation.active {
+    border-color: var(--invalid-color)
+}
+#add-automation.active {
+    border-color: var(--valid-color)
+}
+#event-functions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: visible;
+    width: 108%;
+    border-top: 1px solid var(--border-color);
+    margin-top: 4px;
+    padding-top: 8px
+}
+#event-functions .form-controls {
+    width: 450px;
+    flex-flow: row wrap
+}
+#event-functions button.active {
+    border-color: var(--valid-color)
+}
+.event-function-prompt {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 450px;
+    margin-top: 8px
+}
+.event-function-prompt label {
+    margin: 10px 0;
+    text-align: left
+}

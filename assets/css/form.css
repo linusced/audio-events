@@ -1,0 +1,154 @@
+input.valid, input.valid + p {
+    border-color: var(--valid-color) !important
+}
+input.invalid, input.invalid + p {
+    border-color: var(--invalid-color) !important
+}
+input[type="submit"] {
+    color: var(--bg-color);
+    background: var(--text-color);
+    margin-left: 0
+}
+form:valid input[type="submit"]:hover, form:valid input[type="submit"]:focus {
+    border-color: var(--valid-color);
+    box-shadow: 0 0 15px 1px var(--valid-color)
+}
+form:invalid input[type="submit"]:hover, form:invalid input[type="submit"]:focus {
+    border-color: var(--invalid-color);
+    box-shadow: 0 0 15px 1px var(--invalid-color)
+}
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--bg-color);
+    border: 2px solid var(--border-color);
+    padding: 7px 25px
+}
+.form-container > h2 {
+    padding-bottom: 0
+}
+.form-container > a  {
+    margin: 0 0 7px 0
+}
+.form-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-top: 1px solid var(--border-color);
+    overflow: visible;
+    width: 108%;
+    padding: 10px 4%;
+    margin-top: 10px
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: visible;
+    width: 100%;
+    padding: 10px 0
+}
+.form-group.inputs {
+    flex-direction: row
+}
+.form-group-content {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    overflow: visible;
+    width: 100%
+}
+.form-group label {
+    margin-right: auto;
+    padding-bottom: 3px
+}
+.form-group-content label {
+    margin-right: 0
+}
+.form-group input {
+    margin-left: 0;
+    margin-right: 0;
+    min-width: 330px;
+    width: 100%
+}
+.form-group.inputs input {
+    width: 50%;
+    min-width: initial
+}
+.form-required {
+    position: relative;
+    overflow: visible;
+    padding-right: 0
+}
+.form-required::before {
+    position: absolute;
+    right: 96%;
+    top: 6%;
+    font-size: 20px;
+    content: "*"
+}
+.form-required::after {
+    content: "Required"
+}
+.form-input-info {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 90%;
+    width: 100%;
+    background: var(--bg-color);
+    border: 1px solid var(--focus-color);
+    z-index: 2
+}
+.form-input-info.top {
+    top: auto;
+    bottom: 90%
+}
+.form-group input:focus + .form-input-info {
+    display: block
+}
+.form-submit, .form-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    overflow: visible;
+    margin-top: 6px
+}
+.form-controls {
+    margin-bottom: 6px
+}
+.form-controls :first-child {
+    margin-left: 0
+}
+.form-controls :last-child {
+    margin-right: 0
+}
+.form-msg {
+    font-size: 18px;
+    color: var(--valid-color)
+}
+input[type="color"] {
+    height: 40px;
+    border: none;
+    padding: 0
+}
+input[type="reset"] {
+    color: var(--text-color);
+    background: var(--bg-color);
+    border-color: var(--invalid-color) !important;
+    margin-right: 0;
+    cursor: pointer
+}
+input[type="reset"]:hover, input[type="reset"]:focus {
+    box-shadow: 0 0 15px 1px var(--invalid-color)
+}
+select {
+    font-size: 20px;
+    padding: 3px 7px;
+    text-align-last: center;
+}

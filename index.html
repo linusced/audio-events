@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <link rel="stylesheet" href="./assets/css/default.css">
+    <link rel="stylesheet" href="./assets/css/form.css">
+    <link rel="stylesheet" href="./assets/css/editor.css">
+    <link rel="stylesheet" href="./assets/css/slider.css">
+
+    <script src="./assets/js/classes/audio_events.js"></script>
+    <script src="./assets/js/classes/slider.js"></script>
+    <script src="./assets/js/classes/waveformEditor.js"></script>
+    <script src="./assets/js/classes/editorCanvas.js"></script>
+    <script src="./assets/js/classes/extends_editorCanvas.js"></script>
+
+    <script src="./assets/js/editor/controls.js"></script>
+    <script src="./assets/js/editor/json_events.js"></script>
+    <script src="./assets/js/editor/shortcuts.js"></script>
+    <script src="./assets/js/editor/utility.js"></script>
+
+    <script src="./assets/js/editor/waveforms/static_waveform.js"></script>
+    <script src="./assets/js/editor/waveforms/zoomed_waveform.js"></script>
+
+    <script src="./assets/js/editor/event/functions/add_automation.js"></script>
+    <script src="./assets/js/editor/event/functions/remove_automation.js"></script>
+    <script src="./assets/js/editor/event/functions/copy.js"></script>
+    <script src="./assets/js/editor/event/functions/loop.js"></script>
+    <script src="./assets/js/editor/event/functions/beats.js"></script>
+    <script src="./assets/js/editor/event/functions/math.js"></script>
+
+    <script src="./assets/js/editor/event/events_editor.js"></script>
+    <script src="./assets/js/editor/event/selected_event.js"></script>
+
+    <script src="./assets/js/form.js"></script>
+    <script src="./assets/js/editor/initializer.js"></script>
+    <script src="./assets/js/script.js"></script>
+
+    <title>Audio Events</title>
+</head>
+
+<body>
+    <div class="form-container" id="start">
+        <h2>Select Files:</h2>
+        <form id="files">
+            <div class="form-group">
+                <label for="files-audio">Audio File:</label>
+                <input type="file" name="audio" id="files-audio" accept="audio/*" required title="Select an audio file."
+                    data-validation="">
+            </div>
+            <div class="form-group">
+                <label for="files-json">JSON File:</label>
+                <input type="file" name="json" id="files-json" accept="application/json"
+                    title="Select a json file containing the events data. If no file is selected then a new json file will be created."
+                    data-validation="">
+            </div>
+            <div class="form-group">
+                <label for="files-bpm">BPM:</label>
+                <input type="number" name="bpm" id="files-bpm" min="0" step="1" title="The BPM of the audio file."
+                    data-validation="">
+            </div>
+            <div class="form-group">
+                <label for="files-timeSignature">Time Signature:</label>
+                <input type="number" name="timeSignature" id="files-timeSignature" min="1" step="1"
+                    title="The time signature of the audio file." data-validation="">
+            </div>
+            <div class="form-submit">
+                <input type="submit" name="submit" value="Submit">
+                <p class="form-msg"></p>
+            </div>
+        </form>
+    </div>
+    <div id="editor">
+        <div class="container" id="editor-container"></div>
+        <div class="container row" id="editor-events-control">
+            <div id="preview">
+                <canvas width="600" height="337"></canvas>
+                <div id="preview-title">Preview</div>
+            </div>
+            <div class="form-container hidden" id="selected-event">
+                <h2>Selected Event:</h2>
+                <form id="event-form">
+                    <div class="form-group">
+                        <label for="event-time">Time:</label>
+                        <input type="number" name="time" step="any" id="event-time" title="Event time" min="0" max="1"
+                            required data-validation="">
+                    </div>
+                    <div class="form-group">
+                        <label for="event-color">Color:</label>
+                        <input type="color" name="color" step="any" id="event-color" title="Event color" value="#ffffff"
+                            required data-validation="">
+                    </div>
+                    <div class="form-controls">
+                        <button type="button" id="add-automation">Add</button>
+                        <h2>Automation:</h2>
+                        <button type="button" id="remove-automation">Remove</button>
+                    </div>
+                    <div id="event-automation"></div>
+                    <div class="form-submit">
+                        <input type="submit" name="submit" value="Save">
+                        <input type="reset" name="delete" value="Delete">
+                    </div>
+                </form>
+                <div id="event-functions">
+                    <div class="form-controls">
+                        <button type="button" id="event-copy">Copy Event</button>
+                        <button type="button" id="event-loop">Loop Automation</button>
+                        <button type="button" id="event-beats">Beats Automation</button>
+                        <button type="button" id="event-math">Math</button>
+                    </div>
+                    <div class="event-function-prompt hidden" id="event-copy-prompt">
+                        <label for="event-copy-position" class="small">Select copy position by clicking in the event
+                            timeline or
+                            typing it manually in the input below:</label>
+                        <input type="number" id="event-copy-position" min="0" value="0" step="any">
+                        <button type="button" id="event-copy-confirm">Confirm</button>
+                    </div>
+                    <div class="event-function-prompt hidden" id="event-loop-prompt">
+                        <label for="event-loop-amount">Loop Amount:</label>
+                        <input type="number" id="event-loop-amount" min="0" value="1" step="1">
+                        <button type="button" id="event-loop-confirm">Confirm</button>
+                    </div>
+                    <div class="event-function-prompt hidden" id="event-beats-prompt">
+                        <label for="event-beats-amount">Amount of Bars (1 bar = 4 beats) or End Time:</label>
+                        <div>
+                            <select id="event-beats-type">
+                                <option value="amount">Amount</option>
+                                <option value="time">End Time</option>
+                            </select>
+                            <input type="number" id="event-beats-value" min="0" value="1" step="any">
+                        </div>
+                        <label for="event-beats-minAlpha">Min Alpha (the alpha between beats):</label>
+                        <input type="number" id="event-beats-minAlpha" min="0" max="1" step="any">
+                        <label for="event-beats-maxAlpha">Max Alpha (the alpha when the beat hits):</label>
+                        <input type="number" id="event-beats-maxAlpha" min="0" max="1" step="any">
+                        <button type="button" id="event-beats-confirm">Confirm</button>
+                    </div>
+                    <div class="event-function-prompt hidden" id="event-math-prompt">
+                        <label for="event-math-multiplier">Multiplier:</label>
+                        <input type="number" id="event-math-multiplier" step="any">
+                        <button type="button" id="event-math-confirm">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+:root {
+    --border-color: #666;
+    --text-color: #ddd;
+    --text-color-2: #aaa;
+    --bg-color: #080808;
+    --bg-color-2: #161616;
+    --focus-color: #2345db;
+    --valid-color: #168b16;
+    --invalid-color: #b62d2d;
+    --warning-color: #bb700e;
+    --preview-border: var(--border-color);
+    --preview-title: #fff
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Helvetica, sans-serif;
+    text-decoration: none;
+    text-align: center;
+    flex-shrink: 0;
+    overflow-x: hidden
+}
+:focus {
+    outline: 2px solid var(--focus-color)
+}
+.hidden {
+    display: none !important
+}
+html {
+    background: var(--bg-color);
+    height: 100%
+}
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background: var(--bg-color);
+    width: 100vw;
+    min-height: 100%
+}
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, label, button, a, input, input[type="file"]::-webkit-file-upload-button {
+    color: var(--text-color)
+}
+label, button, a, input[type="submit"], input[type="file"], input[type="file"]::-webkit-file-upload-button {
+    cursor: pointer
+}
+button, a, input, input[type="file"]::-webkit-file-upload-button {
+    font-size: 18px;
+    padding: 5px;
+    margin: 3px;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color)
+}
+input[type="file"]::-webkit-file-upload-button {
+    appearance: none;
+    -webkit-appearance: none;
+    margin-right: 10px
+}
+button:hover, button:focus, a:hover, a:focus, input:hover, input:focus, input[type="file"]::-webkit-file-upload-button:hover, input[type="file"]::-webkit-file-upload-button:focus {
+    outline: none;
+    border-color: var(--focus-color);
+    background: var(--bg-color-2)
+}
+input:disabled, input[type="file"]:disabled::-webkit-file-upload-button {
+    cursor: default !important;
+    box-shadow: none !important;
+    border-color: var(--border-color) !important;
+    background: var(--bg-color) !important;
+    color: var(--border-color) !important
+}
+a, button, input[type="submit"] {
+    border-width: 2px;
+    padding: 5px 10px 4px
+}
+h1, .h1 {
+    font-size: 30px;
+    padding: 7px 18px
+}
+h2, .h2 {
+    font-size: 25px;
+    padding: 5px 15px
+}
+h3, .h3 {
+    font-size: 19px;
+    padding: 3px 10px
+}
+h4, .h4 {
+    font-size: 15px;
+    padding: 2px 8px
+}
+p, .p {
+    font-size: 14px;
+    color: var(--text-color-2);
+    padding: 3px 5px
+}
+.h1, .h2, .h3, .h4, .p {
+    padding: 0
+}
+label {
+    font-size: 20px
+}
+label.small {
+    font-size: 18px
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative
+}
+.container:not(.row) > div {
+    width: 100%
+}
+.container.row {
+    flex-direction: row
+}
+#start, #editor {
+    display: none
+}
+body:not(.editor) #start, body.editor #editor {
+    display: flex
+}
